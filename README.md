@@ -7,6 +7,7 @@ A Python Tkinter application developed for Pentre Bach Pre School (PBPS).
 * Secure login system
 * Main menu navigation
 * Add staff records
+* Search staff records
 * Save staff details to a text file
 * Payroll calculator
 * Tax, National Insurance and Pension calculations
@@ -28,13 +29,30 @@ A Python Tkinter application developed for Pentre Bach Pre School (PBPS).
 ### Version 2
 
 * Staff record management
-* Payroll calculator
+* Save staff details to a text file
 
 ### Version 3
 
-* Validation
+* Payroll calculator
+* Tax, National Insurance and Pension calculations
+* Data validation
+
+### Version 4
+
+* Search staff records by Staff ID
+* Automatically retrieve stored staff information
+* Display employee details in the system
+
+## Skills Demonstrated
+
+* Python programming
+* GUI development
 * File handling
-* Complete PBPS management system
+* Data validation
+* Functions
+* Dictionaries
+* User authentication
+* Payroll calculations
 
 ## Author
 
