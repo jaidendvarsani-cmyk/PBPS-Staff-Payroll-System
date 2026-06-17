@@ -38,4 +38,4 @@ A Python Tkinter application developed for Pentre Bach Pre School (PBPS).
 
 ## Author
 
-Jay Vekaria
+Jaiden Varsani
