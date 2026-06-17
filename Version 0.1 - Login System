@@ -1,0 +1,44 @@
+import tkinter as tk
+from tkinter import messagebox
+from tkinter import *
+
+window = tk.Tk()
+window.geometry("230x100")
+window.title("Login System")
+
+def open_main_menu():
+    new_window = Toplevel()
+    new_window.title("Main Menu")
+    new_window.geometry("230x100")
+
+    Label(new_window, text="Main Menu").grid(row=0, column=5, padx=10, pady=5)
+    Button(new_window, width=18, text="Add Staff Record").grid(row=1, column=5, padx=10, pady=5)
+    Button(new_window, width=15, text="Payroll").grid(row=2, column=5, padx=10, pady=5)
+
+def button_click():
+    username = key_entry.get()
+    password = value_entry.get()
+
+    if username in computing_words_dictionary:
+        if computing_words_dictionary[username] == password:
+            messagebox.showinfo("Login", "Login Successful!")
+            window.withdraw()
+            open_main_menu()
+        else:
+            messagebox.showerror("Error", "Incorrect Password")
+    else:
+        messagebox.showerror("Error", "Username Not Found")
+
+computing_words_dictionary = {"123": "123"}
+
+tk.Label(window, text="Username:").grid(row=0, column=0)
+key_entry = tk.Entry(window)
+key_entry.grid(row=0, column=1)
+
+tk.Label(window, text="Password:").grid(row=1, column=0)
+value_entry = tk.Entry(window)
+value_entry.grid(row=1, column=1)
+
+tk.Button(window, text="Login", width=10, command=button_click).grid(row=3, column=0, columnspan=2)
+
+window.mainloop()
