@@ -1,0 +1,381 @@
+import tkinter as tk
+from tkinter import messagebox
+from tkinter import *
+
+# Create window
+window = tk.Tk()
+window.geometry("230x100")
+window.title("Login System")
+
+
+def open_main_menu():
+    new_window = Toplevel()
+    
+    new_window.title("Main Menu")
+    new_window.geometry("300x120")
+
+    # create a toplevel menu
+    menubar = Menu(new_window)
+
+    firstmenu = Menu(menubar, tearoff=0)
+    firstmenu.add_command(label="Option 1")
+    
+    menubar.add_cascade(label="Menu1", menu=firstmenu)
+
+    secondmenu = Menu(menubar, tearoff=0)
+    
+    secondmenu.add_command(label="Quit!", command=new_window.destroy)
+    menubar.add_cascade(label="Quit!", menu=secondmenu)
+    new_window.config(menu=menubar)
+
+    
+
+    def open_staff_member():
+        new_window.destroy()
+        
+        staff_window = Toplevel()
+    
+        staff_window.title("Add Staff Record")
+        staff_window.geometry("400x300")
+        
+        Label(staff_window, text="Add Staff Record").grid(row=1, column=5, padx=10, pady=5)
+        
+        Label(staff_window, text="Staff ID").grid(row=5, column=5, padx=10, pady=5)
+        staff_id_entry = Entry(staff_window)
+        staff_id_entry.grid(row=5, column=6, padx=10, pady=5)
+        staff_id = staff_id_entry.get()
+        
+        Label(staff_window, text="Firstname").grid(row=6, column=5, padx=10, pady=5)
+        firstname_entry = Entry(staff_window)
+        firstname_entry.grid(row=6, column=6, padx=10, pady=5)
+        firstname = firstname_entry.get()
+        
+        Label(staff_window, text="Surname").grid(row=7, column=5, padx=10, pady=5)
+        surname_entry = Entry(staff_window)
+        surname_entry.grid(row=7, column=6, padx=10, pady=5)
+        surname = surname_entry.get()
+        
+        Label(staff_window, text="Address 1").grid(row=8, column=5, padx=10, pady=5)
+        address_1_entry = Entry(staff_window)
+        address_1_entry.grid(row=8, column=6, padx=10, pady=5)
+        address_1 = address_1_entry.get()
+        
+        Label(staff_window, text="Address 2").grid(row=9, column=5, padx=10, pady=5)
+        address_2_entry = Entry(staff_window)
+        address_2_entry.grid(row=9, column=6, padx=10, pady=5)
+        address_2 = address_2_entry.get()
+        
+        Label(staff_window, text="Postcode").grid(row=10, column=5, padx=10, pady=5)
+        postcode_entry = Entry(staff_window)
+        postcode_entry.grid(row=10, column=6, padx=10, pady=5)
+        postcode = postcode_entry.get()
+
+        def back_click():
+            open_main_menu()
+            staff_window.destroy()
+
+        def save_click():
+            
+            staff_id = staff_id_entry.get()
+            if staff_id == "": 
+                messagebox.showwarning("Warning","Please Enter The Staff ID.")
+                return
+            
+            
+            firstname = firstname_entry.get()
+            if firstname == "": 
+                messagebox.showwarning("Warning","Please Enter The Firstname.")
+                return
+            
+            
+            surname = surname_entry.get()
+            if surname == "": 
+                messagebox.showwarning("Warning","Please Enter The Surname.")
+                return
+            
+            
+            address_1 = address_1_entry.get()
+            if address_1 == "": 
+                messagebox.showwarning("Warning","Please Enter The Address.")
+                return
+            
+            
+            postcode = postcode_entry.get()
+            if postcode == "": 
+                messagebox.showwarning("Warning","Please Enter The Postcode.")
+                return
+
+            address_2 = address_2_entry.get()
+            
+            
+            file = open("newstaff.txt", "a")
+            
+            file.write(staff_id + "," + firstname + "," + surname + "," + address_1 + "," + address_2 + "," + postcode + "," + "\n")
+            file.close()
+            messagebox.showinfo("Success", "Staff Member Saved")
+            staff_window.destroy()
+            open_staff_member()
+
+        Button(staff_window, text="Back", width=10, command=back_click).grid(row=11, column=5, padx=10, pady=5)
+        Button(staff_window, text="Save", width=10, command=save_click).grid(row=11, column=7, padx=10, pady=5)
+
+    create_staff_member = Button(new_window, width=18, text="Add Staff Record", command=open_staff_member).grid(row=1, column=5, padx=10, pady=5)
+
+    def search_staff():
+        new_window.destroy()
+        search_staff_window = Toplevel()
+
+        search_staff_window.title("Search Staff")
+        search_staff_window.geometry("400x300")
+
+        Label(search_staff_window, text="Search Staff").grid(row=0, column=2, padx=10, pady=5)
+
+        Label(search_staff_window, text="Staff ID: ").grid(row=1, column=1, padx=10, pady=5)
+        staffid_entry = Entry(search_staff_window)
+        staffid_entry.grid(row=1, column=2, padx=10, pady=5)
+        staffid_entry.get()
+
+        Label(search_staff_window, text="Firstname").grid(row=3, column=1, padx=10, pady=5)
+        firstname_entry = Entry(search_staff_window)
+        firstname_entry.grid(row=3, column=2, padx=10, pady=5)
+        firstname = firstname_entry.get()
+        
+        Label(search_staff_window, text="Surname").grid(row=4, column=1, padx=10, pady=5)
+        surname_entry = Entry(search_staff_window)
+        surname_entry.grid(row=4, column=2, padx=10, pady=5)
+        surname = surname_entry.get()
+        
+        Label(search_staff_window, text="Address 1").grid(row=5, column=1, padx=10, pady=5)
+        address_1_entry = Entry(search_staff_window)
+        address_1_entry.grid(row=5, column=2, padx=10, pady=5)
+        address_1 = address_1_entry.get()
+        
+        Label(search_staff_window, text="Address 2").grid(row=6, column=1, padx=10, pady=5)
+        address_2_entry = Entry(search_staff_window)
+        address_2_entry.grid(row=6, column=2, padx=10, pady=5)
+        address_2 = address_2_entry.get()
+        
+        Label(search_staff_window, text="Postcode").grid(row=7, column=1, padx=10, pady=5)
+        postcode_entry = Entry(search_staff_window)
+        postcode_entry.grid(row=7, column=2, padx=10, pady=5)
+        postcode = postcode_entry.get()
+
+
+        
+
+        def search():
+             search_id = staffid_entry.get()
+             found = False
+
+             file = open("newstaff.txt", "r")
+
+             for line in file:
+                 parts = line.split(",")
+
+                 if parts[0] == search_id:
+                     found = True
+                     
+                     firstname_entry.delete(0, END)
+                     surname_entry.delete(0, END)
+                     address_1_entry.delete(0, END)
+                     address_2_entry.delete(0, END)
+                     postcode_entry.delete(0, END)
+
+                     firstname_entry.insert(0, parts[1])
+                     surname_entry.insert(0, parts[2])
+                     address_1_entry.insert(0, parts[3])
+                     address_2_entry.insert(0, parts[4])
+                     postcode_entry.insert(0, parts[5])
+                     break
+                    
+             
+             file.close()
+
+             if found == False:
+                 messagebox.showerror("Error", "Staff ID Not Found")
+        Button(search_staff_window, text="Search", width=6, command=search).grid(row=2, column=2,padx=10, pady=5)
+
+
+                
+        def back_click():
+            open_main_menu()
+            search_staff_window.destroy()
+
+        Button(search_staff_window, width=8, text="Back", command=back_click).grid(row=8, column=2, padx=10, pady=5)           
+
+    searchstaff = Button(new_window, width=15, text="Search Staff", command=search_staff).grid(row=3, column=5, padx=10, pady=5)            
+                
+    def open_payroll():
+        new_window.destroy()
+        payroll_window = Toplevel()
+
+        payroll_window.title("Payroll")
+        payroll_window.geometry("400x300")
+
+        Label(payroll_window, text="Payroll").grid(row=0, column=1, padx=10, pady=5)
+
+        Label(payroll_window, text="Gross Pay: ").grid(row=3, column=0, padx=10, pady=5)
+        gross_pay_entry = Entry(payroll_window)
+        gross_pay_entry.grid(row=3, column=1, padx=10, pady=5)
+        gross_pay_entry.get()
+
+        Label(payroll_window, text="Tax: ").grid(row=5, column=0, padx=10, pady=5)
+        tax_entry = Entry(payroll_window)
+        tax_entry.grid(row=5, column=1, padx=10, pady=5)
+        tax_entry.get()
+
+        Label(payroll_window, text="National Insurance: ").grid(row=6, column=0, padx=10, pady=5)
+        national_insurance_entry = Entry(payroll_window)
+        national_insurance_entry.grid(row=6, column=1, padx=10, pady=5)
+        national_insurance_entry.get()
+
+        Label(payroll_window, text="Pension Contribution: ").grid(row=7, column=0, padx=10, pady=5)
+        pension_contribution_entry = Entry(payroll_window)
+        pension_contribution_entry.grid(row=7, column=1, padx=10, pady=5)
+        pension_contribution_entry.get()
+
+        Label(payroll_window, text="Deductions: ").grid(row=8, column=0, padx=10, pady=5)
+        deductions_entry = Entry(payroll_window)
+        deductions_entry.grid(row=8, column=1, padx=10, pady=5)
+        deductions_entry.get()
+
+        Label(payroll_window, text="Net Pay: ").grid(row=9, column=0, padx=10, pady=5)
+        net_pay_entry = Entry(payroll_window)
+        net_pay_entry.grid(row=9, column=1, padx=10, pady=5)
+        net_pay_entry.get()
+
+   
+        def calculate_click():
+            if gross_pay_entry.get() == "":
+                messagebox.showwarning("Warning", "Please Enter a Gross Pay.")
+                return
+
+            gross_pay = float(gross_pay_entry.get())
+
+            tax = 0.19 * gross_pay
+            tax_entry.insert(0, str(tax))
+
+            national_insurance = 0.085 * gross_pay
+            national_insurance_entry.insert(0, str(national_insurance))
+
+            pension_contribution = 0.1 * gross_pay
+            pension_contribution_entry.insert(0, str(pension_contribution))
+
+            deductions = tax + national_insurance + pension_contribution
+            deductions_entry.insert(0, str(deductions))
+
+            net_pay = gross_pay - deductions
+            net_pay_entry.insert(0, str(net_pay))
+    
+
+        def payroll_back():
+            open_main_menu()
+            payroll_window.destroy()
+
+        Button(payroll_window, text="Calculate", command=calculate_click).grid(row=4, column=1, padx=10, pady=5)
+        Button(payroll_window, text="Back", command=payroll_back, width=6).grid(row=10, column=6)
+
+    payroll = Button(new_window, width=15, text="Payroll", command=open_payroll).grid(row=2, column=5, padx=10, pady=5)
+
+# --- Button Function ---
+def button_click():
+    username = key_entry.get()
+    password = value_entry.get()
+
+    found = False
+
+    file = open("username_passwords.txt", "r")
+
+    for line in file:
+        parts = line.strip().split(",")
+
+        if parts[0] == username and parts[1] == password:
+            found = True
+
+            window.withdraw()
+            open_main_menu()
+            break
+                     
+    file.close()
+
+    if found == False:
+        messagebox.showerror("Error", "Username")
+        
+def register():
+
+    
+    window.withdraw()
+
+    register = Toplevel()
+    register.title("Payroll")
+    register.geometry("230x100")
+    
+    
+    Label(register, text="Username:").grid(row=0, column=0)
+    key_entry = Entry(register)
+    key_entry.grid(row=0, column=1)
+
+
+    Label(register, text="Password:").grid(row=1, column=0)
+    value_entry = Entry(register)
+    value_entry.grid(row=1, column=1)
+
+    def save_details():
+        username = key_entry.get()
+        password = value_entry.get()
+
+
+        
+        file = open("username_passwords.txt", "a")
+
+        if username == "":
+            messagebox.showerror("Error", "Please Enter a Username")
+            return
+
+        if password == "":
+            messagebox.showerror("Error", "Please Enter a Password")
+            return
+            
+        file.write(username + "," + password + "\n")
+        file.close()
+        
+
+        if username == "":
+            messagebox.showerror("Error", "Please Enter a Username.")
+
+        if password == "":
+            messagebox.showerror("Error", "Please Enter a Password.")
+        else:
+            messagebox.showinfo("Success", "Login Saved")
+
+        register.destroy()
+        window.deiconify()
+
+    def back_to_login():
+        register.destroy()
+        window.deiconify()
+        
+
+
+    Button(register, text="Create", width=10, command=save_details).grid(row=3, column=0, columnspan=2)
+    Button(register, text="Back", width=10, command=back_to_login).grid(row=4, column=0, columnspan=2)
+
+
+# --- Widgets ---
+tk.Label(window, text="Username:").grid(row=0, column=0)
+key_entry = tk.Entry(window)
+key_entry.grid(row=0, column=1)
+
+tk.Label(window, text="Password:").grid(row=1, column=0)
+value_entry = tk.Entry(window)
+value_entry.grid(row=1, column=1)
+
+
+# Login Button 
+tk.Button(window, text="Login", width=10, command=button_click).grid(row=3, column=0, columnspan=2)
+
+tk.Button(window, text="Register", width=10, command=register).grid(row=4, column=0, columnspan=2)
+
+
+window.mainloop()
+
